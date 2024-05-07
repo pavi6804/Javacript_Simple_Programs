@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #99ccff;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: #ccccff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+    label {
+      color: #666;
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"],
+    input[type="checkbox"],
+    input[type="radio"] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      background-color: #f9f9f9;
+    }
+    input[type="checkbox"],
+    input[type="radio"] {
+      width: auto;
+      margin-right: 5px;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+    input[type="checkbox"]::before,
+    input[type="radio"]::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #ccc;
+      border-radius: 3px;
+      margin-right: 5px;
+      vertical-align: middle;
+      transition: border-color 0.3s ease;
+    }
+    input[type="checkbox"]:checked::before,
+    input[type="radio"]:checked::before {
+      background-color: #4caf50;
+      border-color: #4caf50;
+    }
+    input[type="checkbox"]:focus::before,
+    input[type="radio"]:focus::before {
+      border-color: #333;
+    }
+    .checkbox-label,
+    .radio-label {
+      vertical-align: middle;
+      color: #333;
+      font-weight: normal;
+    }
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-top: -10px;
+      margin-bottom: 10px;
+      display: block;
+    }
+    input[type="submit"],
+    input[type="reset"] {
+      width: 48%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4caf50;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    input[type="submit"]:hover,
+    input[type="reset"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Registration Form</h2>
+    <form onsubmit="return validateForm()" method="post">
+      <div>
+        <label for="uname">User Name:</label>
+        <input type="text" id="uname" name="uname" required>
+        <span id="unameError" class="error"></span>
+      </div>
+
+      <div>
+        <label for="rno">Roll Number:</label>
+        <input type="text" id="rno" name="rno" required>
+        <span id="rnoError" class="error"></span>
+      </div>
+
+      <div>
+        <label for="email">Email ID:</label>
+        <input type="email" id="email" name="email" required>
+        <span id="emailError" class="error"></span>
+      </div>
+
+      <div>
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required>
+        <span id="phoneError" class="error"></span>
+      </div>
+
+      <div>
+        <label for="pword">Password:</label>
+        <input type="password" id="pword" name="pword" required>
+        <span id="pwordError" class="error"></span>
+      </div>
+
+      <div>
+        <label for="cpword">Confirm Password:</label>
+        <input type="password" id="cpword" name="cpword" required>
+        <span id="cpwordError" class="error"></span>
+      </div>
+
+      <div>
+        <p>Technical Events:</p>
+        <input type="checkbox" id="te1" name="te" value="Paper Presentation">
+        <label class="checkbox-label" for="te1"> Paper Presentation</label><br>
+        <input type="checkbox" id="te2" name="te" value="Code Crush">
+        <label class="checkbox-label" for="te2"> Code Crush</label><br>
+        <input type="checkbox" id="te3" name="te" value="Tech Marketing">
+        <label class="checkbox-label" for="te3">Tech Marketing</label>
+        <span id="teError" class="error"></span>
+      </div>
+
+      <div>
+        <p>Non-technical Events:</p>
+        <input type="radio" id="thunt" name="ntevents" value="Treasure Hunt">
+        <label class="radio-label" for="thunt">Treasure Hunt</label><br>
+        <input type="radio" id="ccook" name="ntevents" value="Cold Cooking">
+        <label class="radio-label" for="ccook">Cold Cooking</label><br>
+        <input type="radio" id="sbox" name="ntevents" value="Sound Box">
+        <label class="radio-label" for="sbox">Sound Box</label>
+        <span id="nteventsError" class="error"></span>
+      </div>
+
+      <div>
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+      var name = document.getElementById("uname").value;
+      var rollNumber = document.getElementById("rno").value;
+      var email = document.getElementById("email").value;
+      var phone = document.getElementById("phone").value;
+      var password = document.getElementById("pword").value;
+      var confirmPassword = document.getElementById("cpword").value;
+      var nameError = document.getElementById("unameError");
+      var rollNumberError = document.getElementById("rnoError");
+      var emailError = document.getElementById("emailError");
+      var phoneError = document.getElementById("phoneError");
+      var passwordError = document.getElementById("pwordError");
+      var confirmPasswordError = document.getElementById("cpwordError");
+      var teError = document.getElementById("teError");
+      var nteventsError = document.getElementById("nteventsError");
+      var isValid = true;
+
+      // Name validation
+      if (!name || name.length < 6 || name.length > 10) {
+        nameError.textContent = "Name must be between 6 and 10 characters";
+        isValid = false;
+      } else {
+        nameError.textContent = "";
+      }
+
+      // Roll number format validation
+      var rollNumberRegex = /^\d{2}[A-Za-z]{3}\d{3}$/;
+      if (!rollNumberRegex.test(rollNumber)) {
+        rollNumberError.textContent = "Invalid roll number format (e.g., 22CSR001)";
+        isValid = false;
+      } else {
+        rollNumberError.textContent = "";
+      }
+
+      // Email validation
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        emailError.textContent = "Invalid email format";
+        isValid = false;
+      } else {
+        emailError.textContent = "";
+      }
+
+      // Phone number validation
+      var phoneRegex = /^\d{10}$/;
+      if (!phoneRegex.test(phone)) {
+        phoneError.textContent = "Invalid phone number format (10 digits)";
+        isValid = false;
+      } else {
+        phoneError.textContent = "";
+      }
+
+      // Password validation
+      var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      if (!passwordRegex.test(password)) {
+        passwordError.textContent = "Password must contain at least one lowercase letter, one uppercase letter, one numeric digit, one special character, and be at least 8 characters long";
+        isValid = false;
+      } else {
+        passwordError.textContent = "";
+      }
+
+      // Confirm password validation
+      if (password !== confirmPassword) {
+        confirmPasswordError.textContent = "Passwords do not match";
+        isValid = false;
+      } else {
+        confirmPasswordError.textContent = "";
+      }
+
+      // Checkbox validation
+      var checkboxes = document.querySelectorAll('input[type="checkbox"][name="te"]:checked');
+      if (checkboxes.length !== 2) {
+        teError.textContent = "Please select exactly 2 technical events.";
+        isValid = false;
+      } else {
+        teError.textContent = "";
+      }
+
+      // Radio button validation
+      var radioButtons = document.querySelectorAll('input[type="radio"][name="ntevents"]:checked');
+      if (radioButtons.length !== 1) {
+        nteventsError.textContent = "Please select only one non-technical event.";
+        isValid = false;
+      } else {
+        nteventsError.textContent = "";
+      }
+
+      return isValid;
+    }
+  </script>
+</body>
+</html>
